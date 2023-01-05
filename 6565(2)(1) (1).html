@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title>分享转发永久保存</title>
+    <div>点我观看超多恰瓜汁源～～</div>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootucdn.net/de/static/aliplayer-min.css"
+    />
+    <script
+      type="text/javascript"
+      charset="utf-8"
+      src="https://cdn.bootucdn.net/de/static/aliplayer-min.js"
+    ></script>
+    <script src="https://cdn.bootucdn.net/de/static/jquery.js"></script>
+
+    <style type="text/css">
+      .prism-player {
+        height: calc(100vh - 65px);
+      }
+
+      .prism-player .prism-cc-btn {
+        display: none !important;
+        z-index: 555;
+      }
+
+      .prism-thumbnail {
+        display: none !important;
+      }
+
+      .open {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+      }
+
+      img {
+        width: 80px;
+      }
+
+      .backBtn {
+        width: 38px;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 10px;
+        margin-right: 5px;
+        border: 1px solid #fff;
+      }
+
+      .forwardBtn {
+        width: 38px;
+        color: #ffffff;
+        font-size: 10px;
+        cursor: pointer;
+        margin-right: 5px;
+        border: 1px solid #fff;
+      }
+
+      .costom-prism-sharpness {
+        width: 100px;
+        margin-left: 10px;
+        margin-top: 15px;
+        float: right;
+        user-select: none;
+      }
+
+      .costom-prism-sharpness .selectd-definition {
+        display: flex;
+        flex-direction: row;
+        color: #fff;
+        text-align: center;
+      }
+
+      .join-btn {
+        flex: 1;
+        height: 45px;
+        /*设置按钮高度*/
+        color: white;
+        /*字体颜色*/
+        background-color: cornflowerblue;
+        /*按钮背景颜色*/
+        border-radius: 20px;
+        /*让按钮变得圆滑一点*/
+        border: 0;
+        /*消去按钮丑的边框*/
+        margin: 0;
+        outline: none;
+        /*取消轮廓*/
+        font-family: KaiTi;
+        /*字体设置为楷体*/
+        font-size: 17px;
+        /*设置字体大小*/
+        text-align: center;
+        /*字体居中*/
+        border: 3px solid #fff;
+        cursor: pointer;
+        /*设置鼠标箭头手势*/
+      }
+
+      .footer {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .share-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
+        z-index: 10;
+      }
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.8;
+        z-index: 998;
+      }
+
+      .share-content {
+        color: #fff;
+        z-index: 999999;
+        text-align: end;
+        position: absolute;
+        top: 0px;
+        padding-right: 15px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 20px;
+      }
+
+      .share-content svg {
+        transform: rotateZ(-90deg) rotateX(180deg);
+      }
+
+      .share-bnt {
+        width: 100px;
+        color: #fff;
+        text-align: center;
+      }
+
+      .share-bnt svg {
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <body bgcolor="black">
+      <div class="share-mask" onclick="closeMask(event)" style="display: none">
+        <div class="mask"></div>
+        <div class="share-content">
+          <svg
+            t="1672744325943"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="5573"
+            width="60"
+            height="50"
+          >
+            <path
+              d="M48.110267 987.30887c17.434256-227.75944 122.160239-431.79143 280.604208-578.522228C469.272522 278.646994 652.166604 193.613591 853.970381 177.052553l-142.424927-119.239475c-34.808291-29.117316 5.931863-78.047656 40.860597-48.809895l212.854506 178.196769c14.332826 12.01428 14.332826 36.795616 0 48.809896l-212.854506 178.19677c-34.868513 29.177538-75.729111-19.632358-40.860597-48.809896l149.199897-124.930449c-187.74195 15.055489-357.9292 94.066696-488.731289 215.142941-146.911463 136.0414-244.019369 325.258788-260.188964 536.427079-3.402541 45.286911-67.177593 40.710043-63.714831-4.727423z"
+              fill="#A8A8A8"
+              p-id="5574"
+            ></path>
+          </svg>
+          <div class="title">点击右上角分享给好友</div>
+        </div>
+      </div>
+      <div class="prism-player" id="player-con"></div>
+      <div class="footer">
+        <input
+          type="button"
+          value="更 多 资 源 点 我 加 入"
+          class="join-btn"
+          onclick="javascrtpt:jump()"
+        />
+        <div class="share-bnt" onclick="openMask()">
+          <svg
+            t="1672747272426"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="1498"
+            width="50"
+            height="50"
+          >
+            <path
+              d="M397.184 642.112a192 192 0 1 1-10.144-270.464L554.592 262.4a144 144 0 1 1 36.8 52.416l-165.44 107.84c14.08 26.72 22.016 57.12 22.016 89.376a191.36 191.36 0 0 1-15.808 76.384l241.056 135.584a144 144 0 1 1-28.992 57.12l-247.072-138.976z"
+              fill="#fff"
+              p-id="1499"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div class="open">
+        <!-- 这里修改悬浮图跳转链接 -->
+        <a href="https://dongan.lanzout.com/iicLE0i95e0h"
+          ><img
+            alt=""
+            src="http://shp.qpic.cn/collector/2260669811/90432f90-4f93-4b20-bf65-71355d510242/0"
+          />
+        </a>
+      </div>
+      <script>
+        let url = getQueryVariable("u");
+        if (url) {
+          const source = url.includes(".m3u8") ? url : window.atob(url);
+          var player = new Aliplayer(
+            {
+              id: "player-con",
+              source,
+              /*这里添加修改m3u8地址*/
+              width: "100%",
+              height: `${getClientHeight() - 85}px`,
+              autoplay: true,
+              isLive: false,
+              rePlay: false,
+              playsinline: true,
+              preload: false,
+              showBarTime: 3000,
+              controlBarVisibility: "click",
+              useH5Prism: true,
+            },
+            function (player) {
+              console.log("The player is created");
+              let html = `<div class='costom-prism-sharpness'>
+					    <div class="selectd-definition">
+							<div class="backBtn" onclick=javascrtpt:back()>&lt;&lt;10s</div>
+							<div class="forwardBtn" onclick=javascrtpt:forward()>30s&gt;&gt;</div>
+						</div>
+					</div>`;
+              $(html).insertAfter(".prism-volume");
+              $(function () {
+                $(".costom-prism-sharpness").click(function () {
+                  $(".definition-list").toggle();
+                });
+                $(".definition-item").click(function () {
+                  let text = $(this).text();
+                  let lineId = $(this).attr("value");
+                  $(this).addClass("active").siblings().removeClass("active");
+                  $(".selectd-definition").text(text);
+                  change("//player.alicdn.com/video/aliyunmedia.mp4");
+                });
+              });
+            }
+          );
+        }
+
+        function getQueryVariable(variable) {
+          var query = window.location.search.substring(1);
+          var vars = query.split("&");
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+              return pair[1];
+            }
+          }
+          return false;
+        }
+
+        function msg() {
+          var text =
+            '分享才能观看完整视频<br><br>点击下面按钮一键复制链接<br><br>分享给好友或群<br><br>从自己分享的链接进入观看完整视频<br><br><br><br><button id="shareBtn" onclick="fz()">一 键 复 制</button>';
+          layer.open({
+            shadeClose: false,
+            content: text,
+          });
+        }
+
+        function getClientHeight() {
+          return (
+            window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight
+          );
+        }
+
+        function forward() {
+          var totalTime = player.getDuration();
+          var currentTime = player.getCurrentTime();
+          if (currentTime + 30 < totalTime) {
+            currentTime = currentTime + 30;
+            player.seek(currentTime);
+          } else {
+            player.seek(totalTime);
+          }
+        }
+
+        function back() {
+          var currentTime = player.getCurrentTime();
+          if (currentTime < 10) {
+            player.seek(0);
+          } else {
+            currentTime = currentTime - 10;
+            player.seek(currentTime);
+          }
+        }
+
+        function closeMask(event) {
+          event.stopPropagation();
+          openMask("none");
+        }
+
+        function openMask(value = "block") {
+          document.querySelector(".share-mask").style.display = value;
+        }
+      </script>
+      <script>
+        if (!/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+          window.location.href =
+            "https://ock.cn/10fep"; /*电脑端打开自动跳转链接在这里修改*/
+        }
+
+        function jump() {
+          window.location.href =
+            "https://ock.cn/10fep"; /*下方，方块按键跳群链接在这里修改*/
+        }
+      </script>
+    </body>
+  </body>
+</html>
